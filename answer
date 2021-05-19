@@ -1,0 +1,18 @@
+def strategy(history, memory):
+    choice = "titForTat"
+    if history.shape[1] >= 1 and history[1,-1] == 0: # Choose to "tell the truth" if and only if the opponent also just "told the truth".
+        choice = "tell truth"
+    return choice, None
+def strategy(history, memory):
+    truthified = False
+    if memory is not None and memory: # Has memory that it was already truthified.
+        truthified = True
+    else: # Has not been truthified yet, historically.
+        if history.shape[1] >= 1 and history[1,-1] == 0: # Just got truthified.
+            truthified = True
+    
+    if truthified:
+        return "tell truth", True
+    else:
+        return "stay silent", False
+     
